@@ -1,0 +1,44 @@
+use netflix;
+
+db.filmes.insertOne({
+    titulo:"Duna:parte2",
+    tipo:"Filme",
+    ano: 2024,
+    genero:["ficcao_cientifica", "aventura"],
+    duracao_min:166,
+    avaliacao:{
+        media: 8.5,
+        votos: 342000
+    },
+    disponivel_em:["BR","US","PT"]
+})
+
+//inserir multiplos documentos em uma unica chamada
+
+db.filmes.insertMany([{
+    titulo:"Oppenhimer",
+    tipo:"filme",
+    ano_lancamento:2023,
+    generos:["drama","historia"],
+    duracao_min:180
+},
+{
+    titulo:"The Bear",
+    tipo:"serie",
+    ano_lacamento:2022,
+    genero:["drama","comedia"],
+    temporadas:3
+}])
+
+//Buscar todos os filmes
+db.filmes.find()
+
+//Buscar com filtro: Filmes do tipo "Serie"
+db.filmes.find({tipo:"serie"})
+
+//Buscar um unico documento
+db.filmes.findOne({titulo:"Duna: Parte2"})
+
+//Projecao: retornar só o titulo e avaliacao(1 = incluir, 0 = excluir)
+db.filmes.find({tipo:"Filme"},{"titulo":1,"avaliacao.media":1,"_id":0})
+
